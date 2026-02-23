@@ -19,7 +19,7 @@ public class MainMenuScreen implements Screen
 
     public void render(float delta)
     {
-        ScreenUtils.clear(Color.DARK_GRAY);
+        ScreenUtils.clear(Color.BLACK);
 
         game.viewport.apply();
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
@@ -65,6 +65,5 @@ public class MainMenuScreen implements Screen
     @Override
     public void dispose() {
         background.dispose();
-
     }
 }
