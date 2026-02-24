@@ -11,35 +11,5 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class Main extends ApplicationAdapter
 {
-    private SpriteBatch batch;
-    private Texture background;
-    private FitViewport viewport;
 
-    @Override
-    public void create()
-    {
-        batch = new SpriteBatch();
-        viewport = new FitViewport(1280, 800);
-        background = new Texture("background.png");
-    }
-
-    @Override
-    public void render()
-    {
-        ScreenUtils.clear(Color.DARK_GRAY);
-        batch.begin();
-        batch.draw(background, 0, 0);
-        batch.end();
-    }
-
-    @Override
-    public void dispose()
-    {
-        background.dispose();
-    }
-
-    public void resize(int width, int height)
-    {
-        viewport.update(width, height);
-    }
 }
