@@ -30,13 +30,7 @@ public class GameScreen implements Screen
     @Override
     public void render(float v)
     {
-        generateRoom();
         draw();
-    }
-
-    private void generateRoom()
-    {
-
     }
 
     private void draw()
@@ -61,37 +55,36 @@ public class GameScreen implements Screen
     {
         float midWidth = (background.getWidth() - floor.getWidth()) / 2;
         float midHeight = (background.getHeight() - floor.getHeight()) / 2;
+        float midFloorWidth = floor.getWidth() / 2;
+        float midFloorHeight = floor.getHeight() / 2;
 
         Sprite doorSprite = new Sprite(door);
         doorSprite.setSize(door.getWidth(), door.getHeight());
-        int roomIndex = 0;
+        doorSprite.setOriginCenter();
 
-        if (roomIndex == 0)
-        {
-            // top door
-            doorSprite.setX(floor.getWidth() / 2);
-            doorSprite.setY(midHeight + floor.getHeight() / 2);
-            doorSprite.setRotation(0);
-            doorSprite.draw(game.batch);
+        // top door
+        doorSprite.setX(midWidth + midFloorWidth - door.getWidth() / 2f);
+        doorSprite.setY(midHeight + floor.getHeight() - door.getHeight() / 2f);
+        doorSprite.setRotation(0);
+        doorSprite.draw(game.batch);
 
-            // bottom door
-            doorSprite.setX(floor.getWidth() / 2);
-            doorSprite.setY(floor.getHeight() / 2 - midHeight);
-            doorSprite.setRotation(180);
-            doorSprite.draw(game.batch);
+        // bottom door
+        doorSprite.setX(midWidth + midFloorWidth - door.getWidth() / 2f);
+        doorSprite.setY(midHeight - door.getHeight() / 2f);
+        doorSprite.setRotation(180);
+        doorSprite.draw(game.batch);
 
-            // left door
-            doorSprite.setX(midWidth);
-            doorSprite.setY(floor.getHeight() / 2);
-            doorSprite.setRotation(90);
-            doorSprite.draw(game.batch);
+        // left door
+        doorSprite.setX(midWidth - door.getWidth() / 2f);
+        doorSprite.setY(midHeight + midFloorHeight - door.getHeight() / 2f);
+        doorSprite.setRotation(90);
+        doorSprite.draw(game.batch);
 
-            // right door
-            doorSprite.setX(midWidth +  floor.getWidth() / 2);
-            doorSprite.setY(floor.getHeight() / 2);
-            doorSprite.setRotation(270);
-            doorSprite.draw(game.batch);
-        }
+        // right door
+        doorSprite.setX(midWidth + floor.getWidth() - door.getWidth() / 2f);
+        doorSprite.setY(midHeight + midFloorHeight - door.getHeight() / 2f);
+        doorSprite.setRotation(270);
+        doorSprite.draw(game.batch);
     }
 
     @Override
