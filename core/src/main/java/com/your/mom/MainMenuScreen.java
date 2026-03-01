@@ -26,7 +26,7 @@ public class MainMenuScreen implements Screen
 
         game.batch.begin();
         game.batch.draw(background, 0, 0);
-        game.font.draw(game.batch, "KHALI", 100, 500f);
+        game.font.draw(game.batch, "KHALI", 100, 500);
         game.font.draw(game.batch, "tap to begin", 100, 400);
         game.batch.end();
 

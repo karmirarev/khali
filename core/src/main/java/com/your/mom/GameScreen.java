@@ -40,18 +40,15 @@ public class GameScreen implements Screen
         game.batch.setProjectionMatrix(game.viewport.getCamera().combined);
 
         game.batch.begin();
-
         float midWidth = (background.getWidth() - floor.getWidth()) / 2;
         float midHeight = (background.getHeight() - floor.getHeight()) / 2;
-
         game.batch.draw(background, 0, 0);
         game.batch.draw(floor, midWidth, midHeight);
-        placeDoors();
-
+        // PlaceDoors();
         game.batch.end();
     }
 
-    private void placeDoors()
+    public void PlaceDoors()
     {
         float midWidth = (background.getWidth() - floor.getWidth()) / 2;
         float midHeight = (background.getHeight() - floor.getHeight()) / 2;
