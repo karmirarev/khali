@@ -11,19 +11,30 @@ public class LevelGenerator {
         this.room = room;
     }
 
-    // create the starting room at (0, 0)
+    // create the starting room
+    // when game starts call this with event listener?
     public void SetRoom(Room room, Position position) {
         if (!roomMap.containsKey(position)) {
             roomMap.put(position, new Room());
+            SetDoors();
         }
+        GenerateNeighborRooms();
+        // further: check game state and update the new room generation
     }
 
-    // generate the 4 neighboring rooms
-    // add to the grid or whatever
-    // call checksides from position
-    // check free busy sides
-    // and place the doors according to the new calculation
+    public void GenerateNeighborRooms() {
+        // generate the 4 neighboring rooms
+    }
 
-    // further: check game state and update the new room generation
+    public void SetDoors() {
+        if (roomMap.size() == 1) {
+            // set the 4 doors
 
+        }
+        else {
+            // checksides from position
+            // check free busy sides
+            // place the doors according to the new calculation
+        }
+    }
 }

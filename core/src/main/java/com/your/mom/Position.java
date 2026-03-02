@@ -16,7 +16,7 @@ public class Position {
         this.y = y;
     }
 
-    public static void IterateSides() {
+    public void SetDoor(Side side) {
 
     }
 }
