@@ -60,7 +60,7 @@ public class MainMenuScreen implements Screen
                 game.setScreen(new GameScreen(game));
                 dispose();
             }
-        });
+        }); // remove pls
 
         stage = new Stage(new ScreenViewport());
         stage.addActor(button);

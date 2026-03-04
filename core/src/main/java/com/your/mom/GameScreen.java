@@ -17,7 +17,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-
+        // game.setScreen(new LevelGenerator(room, position, game));
     }
 
     @Override
