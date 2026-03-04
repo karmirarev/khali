@@ -3,10 +3,9 @@ package com.your.mom;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class GameScreen extends Event implements Screen {
+public class GameScreen implements Screen {
     final Khali game;
 
     private Texture background;

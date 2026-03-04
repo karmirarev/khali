@@ -7,10 +7,13 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -18,7 +21,7 @@ import javax.swing.event.ChangeListener;
 public class MainMenuScreen implements Screen
 {
     final Khali game;
-    private Texture background;
+    private final Texture background;
     private Stage stage;
     private Skin skin;
     private BitmapFont font;
@@ -30,7 +33,7 @@ public class MainMenuScreen implements Screen
         background = new Texture("background.png");
     }
 
-    public void create ()
+    public void show()
     {
         stage = new Stage();
         skin  = new Skin();
@@ -49,14 +52,20 @@ public class MainMenuScreen implements Screen
         textButtonStyle.down = skin.newDrawable("white", Color.GRAY);
         textButtonStyle.fontColor = Color.WHITE;
 
-        TextButton button = new TextButton("Click Me", textButtonStyle);
+        TextButton button = new TextButton("START", textButtonStyle);
+        button.setPosition(100, 400);
 
-        button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
+        button.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameScreen(game));
                 dispose();
             }
         });
+
+        stage = new Stage(new ScreenViewport());
+        stage.addActor(button);
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     public void render(float delta)
@@ -69,24 +78,15 @@ public class MainMenuScreen implements Screen
         game.batch.begin();
         game.batch.draw(background, 0, 0);
         game.font.draw(game.batch, "KHALI", 100, 500);
-        game.font.draw(game.batch, "tap to begin", 100, 400);
         game.batch.end();
 
-//        if (Gdx.input.isTouched())
-//        {
-//            game.setScreen(new GameScreen(game));
-//            dispose();
-//        }
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     public void resize(int width, int height)
     {
         game.viewport.update(width, height, true);
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
@@ -107,5 +107,8 @@ public class MainMenuScreen implements Screen
     @Override
     public void dispose() {
         background.dispose();
+        stage.dispose();
+        font.dispose();
+        skin.dispose();
     }
 }

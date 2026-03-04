@@ -9,7 +9,5 @@ public class Position {
         RIGHT
     }
 
-    public void SetDoor(Side side) {
 
-    }
 }

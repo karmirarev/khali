@@ -38,11 +38,11 @@ public class LevelGenerator implements Screen {
         // further: check game state and update the new room generation
     }
 
-    public void GenerateNeighborRooms() {
+    private void GenerateNeighborRooms() {
         // generate the 4 neighboring rooms
     }
 
-    public void SetDoors() {
+    private void SetDoors() {
         if (roomMap.size() == 1) {
             // set the 4 doors
 
