@@ -6,16 +6,17 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class Khali extends Game
-{
+public class Khali<T> extends Game {
 
     public SpriteBatch batch;
     public BitmapFont font;
     public FitViewport viewport;
 
+    private MainMenuScreen mainMenuScreen;
+    private GameScreen gameScreen;
+
     @Override
-    public void create()
-    {
+    public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
         viewport = new FitViewport(1280, 800);
@@ -23,17 +24,29 @@ public class Khali extends Game
         font.setUseIntegerPositions(false);
         font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
 
-        this.setScreen(new MainMenuScreen(this));
+        mainMenuScreen = new MainMenuScreen(this);
+        gameScreen = new GameScreen(this);
+
+        mainMenuScreen.changeScreen.subscribe(this::setGameScreen);
+        gameScreen.changeScreen.subscribe(this::setMenuScreen);
+
+        setMenuScreen(true);
     }
 
-    public void render()
-    {
+    public void render() {
         super.render();
     }
 
-    public void dispose()
-    {
+    public void dispose() {
         batch.dispose();
         font.dispose();
+    }
+
+    private void setMenuScreen(boolean gloop) {
+        this.setScreen(mainMenuScreen);
+    }
+
+    private void setGameScreen(boolean bloop) {
+        this.setScreen(gameScreen);
     }
 }

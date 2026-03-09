@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -14,22 +13,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import com.your.mom.util.Event;
 
 public class MainMenuScreen implements Screen
 {
     final Khali game;
-    private final Texture background;
+    public Event<Boolean> changeScreen;
+
+    private Texture background;
     private Stage stage;
     private Skin skin;
     private BitmapFont font;
+
     TextButton.TextButtonStyle textButtonStyle;
 
     public MainMenuScreen(final Khali game)
     {
         this.game = game;
+        this.changeScreen = new Event<>(true);
         background = new Texture("background.png");
     }
 
@@ -38,6 +39,7 @@ public class MainMenuScreen implements Screen
         stage = new Stage();
         skin  = new Skin();
         font = new BitmapFont();
+
         Gdx.input.setInputProcessor(stage);
         skin.add("default", font);
 
@@ -57,10 +59,9 @@ public class MainMenuScreen implements Screen
 
         button.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
-                dispose();
+                changeScreen.publish();
             }
-        }); // remove pls
+        });
 
         stage = new Stage(new ScreenViewport());
         stage.addActor(button);
@@ -68,8 +69,7 @@ public class MainMenuScreen implements Screen
         Gdx.input.setInputProcessor(stage);
     }
 
-    public void render(float delta)
-    {
+    public void render(float delta) {
         ScreenUtils.clear(Color.BLACK);
 
         game.viewport.apply();
@@ -84,8 +84,7 @@ public class MainMenuScreen implements Screen
         stage.draw();
     }
 
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         game.viewport.update(width, height, true);
     }
 
