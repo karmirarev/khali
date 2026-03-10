@@ -19,22 +19,26 @@ public class Event
 
     public void subscribe(Object subscriber, Action action)
     {
-        // identify the subscription with unique reference to the subscribing object
+        // identify the method subscription with unique reference to the subscribing object
+        
         subscribers.put(subscriber, action);
     }
 
     public void unsubscribe(Object subscriber)
     {
-        // identify the subscription with unique reference to the subscribing object
+        // identify the method subscription with unique reference to the subscribing object
+        
         subscribers.remove(subscriber);
     }
 
-    public void invoke()
+    public void publish()
     {
-        // get values before the loop, so the list remains mutable throughout the loop
-        for (Action subscriberAction : subscribers.values())
+        // get list of values from the map separately and then loop through them,
+        // so that the subscribers remain addable and removable to the map throughout the loop
+        
+        for (Action action : subscribers.values())
         {
-            subscriberAction.accept();
+            action.accept();
         }
     }
 }
