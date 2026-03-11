@@ -1,6 +1,5 @@
 package com.your.mom.util;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Event<T> {
@@ -9,25 +8,25 @@ public class Event<T> {
         void accept(T t);
     }
 
-    private ArrayList<Subscriber<T>> subscribers = new ArrayList<>();
-    // private Hashmap<> subscribers = new HashMap<>();
     private final T message;
+
+    private HashMap<Object, Subscriber<T>> subscribers = new HashMap<>();
 
     public Event(T message) {
         this.message = message;
     }
 
     public void publish() {
-        for (Subscriber<T> subscriber : subscribers) {
+        for (Subscriber<T> subscriber : subscribers.values()) {
             subscriber.accept(message);
         }
     }
 
-    public void subscribe(Subscriber<T> subscriber) {
-        subscribers.add(subscriber);
+    public void subscribe(Object poop, Subscriber<T> subscriber) {
+        subscribers.put(poop, subscriber);
     }
 
-    public void unsubscribe(Subscriber<T> subscriber) {
-        subscribers.remove(subscriber);
+    public void unsubscribe(Object poop) {
+        subscribers.remove(poop);
     }
 }

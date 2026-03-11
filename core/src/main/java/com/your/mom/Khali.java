@@ -27,8 +27,8 @@ public class Khali<T> extends Game {
         mainMenuScreen = new MainMenuScreen(this);
         gameScreen = new GameScreen(this);
 
-        mainMenuScreen.changeScreen.subscribe(this::setGameScreen);
-        gameScreen.changeScreen.subscribe(this::setMenuScreen);
+        mainMenuScreen.changeScreen.subscribe(this, this::setGameScreen);
+        gameScreen.changeScreen.subscribe(this, this::setMenuScreen);
 
         setMenuScreen(true);
     }
