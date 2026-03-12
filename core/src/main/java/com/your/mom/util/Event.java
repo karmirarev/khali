@@ -8,25 +8,19 @@ public class Event<T> {
         void accept(T t);
     }
 
-    private final T message;
-
     private HashMap<Object, Subscriber<T>> subscribers = new HashMap<>();
 
-    public Event(T message) {
-        this.message = message;
-    }
-
-    public void publish() {
+    public void publish(T message) {
         for (Subscriber<T> subscriber : subscribers.values()) {
             subscriber.accept(message);
         }
     }
 
-    public void subscribe(Object poop, Subscriber<T> subscriber) {
-        subscribers.put(poop, subscriber);
+    public void subscribe(Object key, Subscriber<T> subscriber) {
+        subscribers.put(key, subscriber);
     }
 
-    public void unsubscribe(Object poop) {
-        subscribers.remove(poop);
+    public void unsubscribe(Object key) {
+        subscribers.remove(key);
     }
 }

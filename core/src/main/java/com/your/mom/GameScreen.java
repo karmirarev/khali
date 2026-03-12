@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(final Khali game) {
         this.game = game;
-        this.changeScreen = new Event<>(true);
+        this.changeScreen = new Event<>();
         background = new Texture("background.png");
     }
 
@@ -58,7 +58,7 @@ public class GameScreen implements Screen {
 
         button.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                changeScreen.publish();
+                changeScreen.publish(true);
             }
         });
 

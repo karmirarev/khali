@@ -42,11 +42,11 @@ public class Khali<T> extends Game {
         font.dispose();
     }
 
-    private void setMenuScreen(boolean gloop) {
+    private void setMenuScreen(boolean bool) {
         this.setScreen(mainMenuScreen);
     }
 
-    private void setGameScreen(boolean bloop) {
+    private void setGameScreen(boolean bool) {
         this.setScreen(gameScreen);
     }
 }
