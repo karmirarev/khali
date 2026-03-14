@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.your.mom.managers.InputManager;
 import com.your.mom.meta.GameScreen;
@@ -26,7 +26,7 @@ public class Main extends Game
     {
         batch = new SpriteBatch();
         font = new BitmapFont();
-        viewport = new FitViewport(1280f, 800f);
+        viewport = new ScreenViewport();
         inputManager = new InputManager();
         menuScreen = new MenuScreen(inputManager, batch, font, viewport);
         gameScreen = new GameScreen(inputManager, batch, font, viewport);

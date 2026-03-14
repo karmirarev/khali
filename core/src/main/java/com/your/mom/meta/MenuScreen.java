@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.your.mom.managers.InputManager;
-import com.your.mom.utils.Event;
+import com.your.mom.utils.Signal;
 
 public class MenuScreen extends ScreenAdapter
 {
@@ -18,7 +18,7 @@ public class MenuScreen extends ScreenAdapter
     private Viewport viewport;
     private GlyphLayout glyphLayout;
 
-    public Event onEnterGame;
+    public Signal onEnterGame;
 
     public MenuScreen(InputManager inputManager, SpriteBatch batch, BitmapFont font, Viewport viewport)
     {
@@ -28,13 +28,13 @@ public class MenuScreen extends ScreenAdapter
         this.viewport = viewport;
 
         this.glyphLayout = new GlyphLayout();
-        this.onEnterGame = new Event();
+        this.onEnterGame = new Signal();
     }
 
     @Override
     public void show()
     {
-        inputManager.onSpaceClick.subscribe(this, onEnterGame::invoke);
+        inputManager.onSpaceClick.subscribe(this, onEnterGame::publish);
     }
 
     @Override

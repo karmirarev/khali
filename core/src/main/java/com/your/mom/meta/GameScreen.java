@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.your.mom.managers.InputManager;
-import com.your.mom.utils.Event;
+import com.your.mom.utils.Signal;
 
 public class GameScreen extends ScreenAdapter
 {
@@ -20,7 +20,7 @@ public class GameScreen extends ScreenAdapter
 
     private Texture background;
 
-    public Event onEnterMenu;
+    public Signal onEnterMenu;
 
     public GameScreen(InputManager inputManager, SpriteBatch batch, BitmapFont font, Viewport viewport)
     {
@@ -32,13 +32,13 @@ public class GameScreen extends ScreenAdapter
         this.background = new Texture("background.png");
         this.background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
-        this.onEnterMenu = new Event();
+        this.onEnterMenu = new Signal();
     }
 
     @Override
     public void show()
     {
-        inputManager.onSpaceClick.subscribe(this, onEnterMenu::invoke);
+        inputManager.onSpaceClick.subscribe(this, onEnterMenu::publish);
     }
 
     @Override

@@ -3,19 +3,19 @@ package com.your.mom.managers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.your.mom.utils.Event;
+import com.your.mom.utils.Signal;
 
 public class InputManager extends InputAdapter
 {
-    public Event onSpaceClick;
-    public Event onEscapeClick;
-    public Event onEnterClick;
+    public Signal onSpaceClick;
+    public Signal onEscapeClick;
+    public Signal onEnterClick;
 
     public InputManager()
     {
-        onSpaceClick = new Event();
-        onEscapeClick = new Event();
-        onEnterClick = new Event();
+        onSpaceClick = new Signal();
+        onEscapeClick = new Signal();
+        onEnterClick = new Signal();
 
         Gdx.input.setInputProcessor(this);
     }
@@ -25,19 +25,19 @@ public class InputManager extends InputAdapter
     {
         if(keycode == Input.Keys.SPACE)
         {
-            onSpaceClick.invoke();
+            onSpaceClick.publish();
             return true;
         }
 
         if(keycode == Input.Keys.ESCAPE)
         {
-            onEscapeClick.invoke();
+            onEscapeClick.publish();
             return true;
         }
 
         if(keycode == Input.Keys.ENTER)
         {
-            onEnterClick.invoke();
+            onEnterClick.publish();
             return true;
         }
 
