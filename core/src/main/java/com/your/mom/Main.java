@@ -1,5 +1,6 @@
 package com.your.mom;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -24,6 +25,8 @@ public class Main extends Game
     @Override
     public void create()
     {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
         batch = new SpriteBatch();
         font = new BitmapFont();
         viewport = new ScreenViewport();
