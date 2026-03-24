@@ -35,8 +35,7 @@ public class Main extends Game
         gameScreen = new GameScreen(inputManager, batch, font, viewport);
 
         font.setUseIntegerPositions(false);
-        font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
-
+        // font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
         start();
     }
 

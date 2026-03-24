@@ -1,4 +1,4 @@
-package com.your.mom.util;
+package com.your.mom.utils;
 
 import java.util.HashMap;
 

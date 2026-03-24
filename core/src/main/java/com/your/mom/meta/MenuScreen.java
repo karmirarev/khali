@@ -95,6 +95,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.your.mom.managers.InputManager;
 import com.your.mom.utils.Signal;
@@ -103,11 +104,12 @@ public class MenuScreen extends ScreenAdapter
 {
     private final InputManager inputManager;
     private final SpriteBatch batch;
-    private final BitmapFont font;
     private final Viewport viewport;
 
     private Stage stage;
     private Skin skin;
+    private BitmapFont font;
+    private Texture background;
 
     public final Signal onEnterGame;
 
@@ -118,12 +120,18 @@ public class MenuScreen extends ScreenAdapter
         this.font = font;
         this.viewport = viewport;
         this.onEnterGame = new Signal();
+        this.background = new Texture("background.png");
     }
 
     @Override
     public void show()
     {
-        skin = new Skin();
+        stage = new Stage();
+        skin  = new Skin();
+        font = new BitmapFont();
+
+        Gdx.input.setInputProcessor(stage);
+        skin.add("default", font);
 
         Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.WHITE);
@@ -134,18 +142,20 @@ public class MenuScreen extends ScreenAdapter
         skin.add("default", font);
 
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
-        buttonStyle.font = font;
-        buttonStyle.up   = skin.newDrawable("white", Color.DARK_GRAY);
+        buttonStyle = new TextButton.TextButtonStyle();
+        buttonStyle.font = skin.getFont("default");
+        buttonStyle.up = skin.newDrawable("white", Color.DARK_GRAY);
         buttonStyle.down = skin.newDrawable("white", Color.GRAY);
         buttonStyle.fontColor = Color.WHITE;
 
         TextButton startButton = new TextButton("START", buttonStyle);
         startButton.setPosition(
-            (viewport.getWorldWidth()  - startButton.getWidth())  / 2f,
-            (viewport.getWorldHeight() - startButton.getHeight()) / 2f - 40f
+//            (viewport.getWorldWidth()  - startButton.getWidth())  / 2f,
+//            (viewport.getWorldHeight() - startButton.getHeight()) / 2f - 40f
+            100, 400
         );
+
         startButton.addListener(new ClickListener() {
-            @Override
             public void clicked(InputEvent event, float x, float y) {
                 onEnterGame.publish();
             }
@@ -165,8 +175,9 @@ public class MenuScreen extends ScreenAdapter
 
         viewport.apply();
         batch.setProjectionMatrix(viewport.getCamera().combined);
-
         batch.begin();
+        batch.draw(background, 0, 0);
+        font.draw(batch, "KHALI", 100, 500);
         batch.end();
 
         stage.act(delta);
